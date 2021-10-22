@@ -63,20 +63,66 @@
       </div>
     </form> 
   </div>  
-  <div class="tabela">
-    <table border="1">
-      <thead>
-        <th class="center">ID</th>
-        <th>NOME</th>
-        <th>SOBRENOME</th>
-        <th>APELIDO</th>
-        <th>TELEFONE</th>
-        <th>CIDADE</th>
-        <th>ESTADO</th>
-        <th class="center">AÇÕES</th>
-      </thead>
-      <tbody id="tbody">
+  <?php
 
-      </tbody>
-    </table>
+  ?>
+
+  <div class="tabela">
+  <table border="1">
+    <thead>
+      <th class="center">ID</th>
+      <th>NOME</th>
+      <th>SOBRENOME</th>
+      <th>APELIDO</th>
+      <th>TELEFONE</th>
+      <th>CIDADE</th>
+      <th>ESTADO</th>
+      <th class="center">AÇÕES</th>
+    </thead>
+    <tbody id="tbody">
+  <?php
+  if( isset( $_SESSION['cadastro'] ) ){
+    $lista = $_SESSION['cadastro'];
+
+  }
+    // verifica se a lista NAO esta VAZIA
+    
+
+    if( array_key_exists( 'cadastro', $_SESSION ) ){
+      foreach ( $lista as $id => $pessoa ){
+        
+        ?>
+        <tr>
+          <td><?php echo $id+1;?></td>
+          <td><?php echo $pessoa['nome'];?></td>
+          <td><?php echo $pessoa['sobrenome'];?></td>
+          <td><?php echo $pessoa['apelido'];?></td>
+          <td><?php echo $pessoa['telefone'] ;?></td>
+          <td><?php echo $pessoa['cidade'];?></td>
+          <td><?php echo $pessoa['estado'];?></td>
+          <td>
+            <form method="POST" action="index.php">
+              <input type="hidden" name="id" value="<?php echo $id;?>"/>
+              <input class="botao1" name="editar" type="image" src="img/editar.png" width="20px">
+            </form>  
+            <form method="POST" action="cadastro.php">
+              <input type="hidden" name="id_excluir" value="<?php echo $id;?>"/>
+              <input class="botao1" name="excluir" onclick="salvar()" type="image" src="img/excluir.png" width="20px">
+            </form>
+          </td>
+        </tr>  
+    <?php
+      }
+    }
+    else{
+    ?>
+      <tr>
+        <td colspan="7">Nenhum cadastro... ;( </td>
+      </tr>        
+    <?php
+        }
+      
+    ?>
+    </tbody>
+  </table>
   </div>

@@ -1,9 +1,14 @@
+
 function salvar(){
+  
 
   this.lerdados();
   this.valida();
-  this.lista();
+  this.mostra();
 }  
+function mostra(){
+  this.listar();
+}
 function lerdados(){
 
   nome = document.getElementById('nome').value
